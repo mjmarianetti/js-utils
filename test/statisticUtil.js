@@ -7,10 +7,10 @@ const sinon = require('sinon');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-const EnvUtil = require('../src/utils/envUtil');
+const StatisticUtil = require('../src/utils/statisticUtil');
 
 
-describe('EnvUtil', () => {
+describe('StatisticUtil', () => {
 
 
   describe('', () => {

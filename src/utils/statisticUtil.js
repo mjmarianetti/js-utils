@@ -110,4 +110,4 @@ class StatisticUtil {
   }
 
 
-  module.exports = ArrayUtil;
+  module.exports = StatisticUtil;
