@@ -3,7 +3,7 @@
 
 class StatisticUtil {
 
-  constructor () {}
+  constructor() {}
 
   static max(array) {
     return Math.max.apply(null, array);
@@ -33,6 +33,10 @@ class StatisticUtil {
     return StatisticUtil.sum(array) / array.length;
   }
 
+  static avg(array) {
+    return StatisticUtil.mean(array);
+  }
+
   static median(array) {
     array.sort(
       (a, b) => {
@@ -48,66 +52,71 @@ class StatisticUtil {
       return [];
     }
     let modeMap = {},
-    maxCount = 0,
-    modes = [];
+      maxCount = 0,
+      modes = [];
 
     array.forEach(
       (val) => {
         if (!modeMap[val]) {
           modeMap[val] = 1;
-        }
-        else {
+        } else {
           modeMap[val]++;
         }
         if (modeMap[val] > maxCount) {
           modes = [val];
           maxCount = modeMap[val];
-        }
-        else if (modeMap[val] === maxCount) {
+        } else if (modeMap[val] === maxCount) {
           modes.push(val);
           maxCount = modeMap[val];
         }
       });
-      return modes;
-    }
+    return modes;
+  }
 
-    static letiance(array) {
-      let mean = StatisticUtil.mean(array);
-      return StatisticUtil.mean(
-        array.map(
-          (num) => {
-            return Math.pow(num - mean, 2);
-          }
-        )
-      );
-    }
-
-    static standardDeviation(array) {
-      return Math.sqrt(StatisticUtil.letiance(array));
-    }
-
-    static meanAbsoluteDeviation(array) {
-      let mean = StatisticUtil.mean(array);
-      return StatisticUtil.mean(
-        array.map(
-          (num) => {
-            return Math.abs(num - mean);
-          }
-        )
-      );
-    }
-
-    static zScores(array) {
-      let mean = StatisticUtil.mean(array);
-      let standardDeviation = StatisticUtil.standardDeviation(array);
-      return array.map(
+  static variance(array) {
+    let mean = StatisticUtil.mean(array);
+    return StatisticUtil.mean(
+      array.map(
         (num) => {
-          return (num - mean) / standardDeviation;
+          return Math.pow(num - mean, 2);
         }
-      );
-    }
+      )
+    );
+  }
 
+  static standardDeviation(array) {
+    return Math.sqrt(StatisticUtil.variance(array));
+  }
+
+  static meanAbsoluteDeviation(array) {
+    let mean = StatisticUtil.mean(array);
+    return StatisticUtil.mean(
+      array.map(
+        (num) => {
+          return Math.abs(num - mean);
+        }
+      )
+    );
+  }
+
+  static zScores(array) {
+    let mean = StatisticUtil.mean(array);
+    let standardDeviation = StatisticUtil.standardDeviation(array);
+    return array.map(
+      (num) => {
+        return (num - mean) / standardDeviation;
+      }
+    );
   }
 
 
-  module.exports = StatisticUtil;
+  static zScore(num, array) {
+    let mean = StatisticUtil.mean(array);
+    let standardDeviation = StatisticUtil.standardDeviation(array);
+    return (num - mean) / standardDeviation;
+  }
+
+}
+
+
+module.exports = StatisticUtil;

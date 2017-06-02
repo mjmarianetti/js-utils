@@ -3,18 +3,18 @@
 
 class ArrayUtil {
 
-  constructor () {}
+  constructor() {}
 
-  static contains(needle,arrhaystack) {
+  static contains(needle, arrhaystack) {
 
-    if(!Array.isArray(arrhaystack)){
+    if (!Array.isArray(arrhaystack)) {
       return false;
     }
 
     return (arrhaystack.indexOf(needle) > -1);
   }
 
-  static isEmpty(arr){
+  static isEmpty(arr) {
     return arr.length === 0;
   }
 
@@ -24,6 +24,10 @@ class ArrayUtil {
       arr.splice(index, 1);
     }
     return arr;
+  }
+
+  static insertAt(index, arr, item) {
+    return arr.splice(index, 0, item);
   }
 
 }
